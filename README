@@ -12,8 +12,8 @@ http://ant.apache.org
 
 2. 使用方法：
 
-2.1  git 获得源码到本机；
-在当前目录下面生成jianmian/的目录
+2.1  从github获得源码到本机；
+在当前目录下面生成jianmian的目录
 
 2.2  在当前目录下建立keystore目录；
 $ mkdir keystore
