@@ -1,1 +1,38 @@
-这里是见面的源代码项目。
+这里是见面的开放源代码项目。
+
+
+1. 软件环境：
+
+1.1  需要安装好Android SDK环境，参见：
+http://developer.android.com/sdk/index.html
+
+1.2  安装好apache ant，参见：
+http://ant.apache.org
+
+
+2. 使用方法：
+
+2.1  git 获得源码到本机；
+在当前目录下面生成jianmian/的目录
+
+2.2  在当前目录下建立keystore目录；
+$ mkdir keystore
+
+2.3  拷贝你的key文件到keystore；
+$ cp xx.xx keystore/.keystore
+
+2.4  进入jianmian的源程序目录，执行编译；
+  $ cd jianmian
+  $ ant clean release
+  
+2.5  在bin下面可以发现JianMian-release.apk；
+
+
+3. 修改方法：
+
+3.1 
+
+
+
+
+
