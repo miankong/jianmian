@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="cc.miankong.jianmian"
+      android:versionCode="41"
+      android:versionName="1.3">
+
+	<supports-screens
+	android:largeScreens="true"
+	android:normalScreens="true"
+	android:resizeable="true"
+	android:anyDensity="true"
+	/>
+	
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.CAMERA" />
+ 	<uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application android:icon="@drawable/icon"
+    android:label="@string/app_name"
+    android:debuggable="false"
+    >
+    
+        <activity android:name="cc.miankong.julia.Julia"
+                  android:label="@string/app_name"
+                  android:configChanges="keyboardHidden|orientation"
+                  android:screenOrientation="portrait"
+        >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="cc.miankong.julia.plugin.NativeActivity.WebPage"
+                  android:configChanges="keyboardHidden|orientation|uiMode|fontScale"
+                  android:screenOrientation="portrait"
+        >
+        </activity>
+
+        <service android:name="cc.miankong.julia.InProcService.InProcService"
+        	android:exported="false"
+        />
+        
+        <provider android:name="cc.miankong.julia.InProcService.ReadOnlyFilesProvider"
+        	android:authorities="cc.miankong.julia.files"
+        	android:exported="false"
+        />
+
+    </application>
+    
+    <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="8"></uses-sdk>
+</manifest>

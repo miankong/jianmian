@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <link rel="stylesheet" media="screen" href="css/base.css" />
+    <link rel="stylesheet" media="screen" href="css/main.css" />
+    <script type="text/javascript" src="js/json2-min.js"></script>
+    <script type="text/javascript" src="js/r.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/tmpl.js"></script>
+    <script type="text/javascript" src="js/app-met.js"></script>
+
+    <script type="text/javascript">
+        if (0) {// For debug, using Safari. The inner window size is a 480x800.
+            $.ready(function(){window.resizeTo(480, 888);});
+        }
+    </script>
+</head>
+<body>
+<div style="display:none;" id="templates">
+    <div id="tmpl-tabbar" data-view="TabbarView">
+        <div>
+            <div id="tabbed-views">
+            </div>
+            <div id="tabbar">
+                <div data-touchable="changeTab" data-user="home">
+                    <label class="tab" id="home"></label>
+                </div>
+                <div class="selected" data-touchable="changeTab" data-user="snap">
+                    <label class="tab" id="snap"></label>
+                </div>
+                <div data-touchable="changeTab" data-user="opts">
+                    <label class="tab" id="opts"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tmpl-view-home" data-view="NavView">
+        <div class="has-navbar">
+            <div class="navbar">
+                <div class="btn left icon" data-touchable="TimelineCtrl.changeTab" data-user="snap">
+                    <label class="black new-met"></label>
+                </div>
+                <h1></h1>
+                <div class="btn icon" data-touchable="TimelineCtrl.refresh">
+                    <label class="black reload"></label>
+                </div>
+            </div>
+            <div class="nav-views" data-view="timeline">
+            </div>
+        </div>
+    </div>
+
+    <div id="tmpl-view-settings" data-delegate="SettingsCtrl">
+        <div>
+            <ul class="table">
+                <li class="shorter" data-touchable="pushView" data-user="#tmpl-view-about">
+                    <div>
+                        <label>关于</label>
+                    </div>
+                    <span class="more"></span>
+                </li>
+                <li class="shorter" data-touchable="pushView" data-user="#tmpl-view-terms">
+                    <div>
+                        <label>服务条款</label>
+                    </div>
+                    <span class="more"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="tmpl-view-timeline" data-delegate="TimelineCtrl">
+        <div></div>
+    </div>
+
+    <div id="tmpl-view-my-timeline" data-delegate="MyTimelineCtrl">
+        <div></div>
+    </div>
+
+    <div id="tmpl-view-fav-timeline" data-delegate="FavTimelineCtrl">
+        <div></div>
+    </div>
+
+    <div id="tmpl-view-snap" data-delegate="SnapCtrl">
+        <div id="view-snap" class="has-navbar">
+            <div class="navbar">
+                <div class="btn left" data-touchable="cancel">
+                    <label class="black prev">清除</label>
+                </div>
+                <h1>见面</h1>
+                <div class="btn" data-touchable="done">
+                    <label class="black next">照相</label>
+                </div>
+            </div>
+
+            <div class="whole">
+                <div class="input">
+                    <p>我和：</p>
+                    <p class="flex"><input id="default-focus" name="recipient" class="recipient"
+                                           autofocus="true"
+                                           placeholder="输入用逗号分隔的昵称"></p>
+                </div>
+                <div class="name-hint"></div>
+                <div class="optional">
+                    <div class="block">
+                        <textarea name="words" class="words" placeholder="说两句见面的事儿..."></textarea>
+                    </div>
+                    <div class="attach" data-touchable="camera">
+                        <div class="btn">
+                            <label class="cam">添加照片</label>
+                        </div>
+                    </div>
+                    <div class="attachment" data-touchable="camera">
+                        <div class="btn fly-over">
+                            <label>重照</label>
+                        </div>
+                        <img class="pic">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tmpl-view-opts" data-view="NavView">
+        <div class="has-navbar">
+            <div class="navbar">
+                <div class="btn left icon" data-touchable="ProfileCtrl.refresh">
+                    <label class="black reload"></label>
+                </div>
+                <h1></h1>
+                <div class="btn icon" data-touchable="pushView" data-user="#tmpl-view-settings">
+                    <label class="black settings"></label>
+                </div>
+            </div>
+            <div class="nav-views" data-view="opts_view">
+            </div>
+        </div>
+    </div>
+
+    <div id="tmpl-view-opts_view" data-delegate="ProfileCtrl">
+        <div></div>
+    </div>
+
+    <div id="tmpl-view-profile" data-delegate="ProfileCtrl">
+        <div></div>
+    </div>
+
+    <div id="tmpl-view-profile-list" data-delegate="ListOfMetProfilesCtrl">
+        <div></div>
+    </div>
+
+    <div id="tmpl-view-detail" data-delegate="MetOnceDetailCtrl">
+        <div></div>
+    </div>
+
+    <div id="tmpl-test-action">
+        <div>
+            <div class="btn" data-touchable="">
+                <label class="red">清除所有联系人</label>
+            </div>
+            <div class="btn" data-touchable="cancel">
+                <label class="black">取消</label>
+            </div>
+        </div>
+    </div>
+
+    <div id="tmpl-loading">
+        <div class="loading">
+            <div class="loading-indicator"></div>
+            <div class="error-hint"></div>
+        </div>
+    </div>
+
+    <div id="tmpl-view-about">
+        <div class="about">
+            <div class="chrome">
+                <em>关于见面</em>
+            </div>
+            <div class="about-text">
+              <p>“见面”是一款移动社交应用，主要功能是通过分享图片的方式描述谁和谁见面了。</p>
+              <p>“见面”通过分享社交照片的形式，来增强分享社交活动的乐趣。在你聚会时，可随时通过“见面”拍摄照片，写下当时的感受，分享给其他朋友。如果你愿意，还可以分享到新浪微博；通过浏览朋友们的社交照片，你可以发现你关心的朋友们平时都在干什么，跟谁在一起。</p>
+              <p>这些功能都会增进你线下的真实社交活动的有效性和乐趣。</p>
+              <p>“见面”将会不定期的升级来丰富和完善各项功能，请留意我们的通知。</p>
+              <p>如果有任何问题，请通过面孔网联系我们或发邮件到service@miankong.cc。</p>
+              ------
+              <p>面孔<br>2011年7月<br>www.miankong.cc</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="tmpl-view-terms">
+        <div>
+			<div class="chrome">
+				<em>隐私声明</em>
+			</div>
+			<div class="about-text">
+			  <p>面孔为您提供&quot;见面&quot;社交照片分享应用软件（简称“见面”），&quot;见面&quot;是一款为移动通信设备提供社交图片、文字分享及其他相关服务的应用软件。 依据法律的规定，我们将在特定情形下收集、使用、保存和披露您的个人信息。以下条款描述了我们如何收集、使用、保存和披露您的个人信息。</p>
+		      <p>1、个人信息的收集 </p>
+              <p>1.1 个人信息</p>
+              <p>我们使用、保存、使用和披露个人信息是为了通过创建账户、识别用户、回应查询和邮件等方式来为您提供服务。面孔网和&quot;见面&quot;可能会向您提供关于通讯方面的管理和服务、发送新闻、调查、优惠和促销信息以及其他宣传材料以为您提供更好的服务。 </p>
+              <p>1.2 为实现服务目的而收集</p>
+              <p>您无需用户账户即可浏览“见面”中的应用。如果您想使用面孔网更多功能，须以新浪微博账号授权给“见面”。您须承诺和保证： </p>
+              <p class="indent">1.2.1 为实现&quot;见面&quot;之服务目的，面孔网和“见面”会通过技术手段收集您的个人信息，包括姓名，爱好，照片，地理信息，电话号码、手机通讯录等使用“见面”所必需的信息。 </p>
+              <p class="indent">1.2.2 经过您的允许，“见面”将分析您的手机通讯录，来帮助您寻找已经在使用“见面”的朋友。</p>
+              <p> 1.3 用户提供 </p>
+              <p class="indent">1.3.1 如果您需要使用更多“见面”功能，例如将“见面”的内容分享到微博，或完善您的个人信息，以便享受更多的服务或更加便捷的联系好友，您需要完善您的个人名片，如填写您的邮箱、性别、所在地、公司、毕业学校、生日等个人信息。 </p>
+              <p class="indent">1.3.2 您提供的信息，“见面”将最大限度尽合理之商业义务进行保密。经过您的同意，“见面”将会向您提供新闻、资讯、版本升级等服务。 </p>
+              <p> 1.4 “见面”具有图片和信息分享的功能。如果您将信息或其他内容发送给另一个用户，“见面”服务器将会为您保存此信息/内容，并将此信息/内容发送给该用户。 </p>
+              <p> 1.5 您提供信息的其他方式</p>
+              <p>我们将采用其他方式（例如：电子邮件、信息下载、购买产品或服务、用户支持、反馈以及调查表）来收集您的个人信息。如果您将个人信息填写在其他开放的平台上，其他用户可能会获知您的信息。 </p>
+              <p> 1.6 您的其他信息</p>
+              <p>为了便于您使用面孔网和“见面”软件，我们的服务器将会收集关于您的移动通讯设备的信息，例如型号、设备ID、互联网协议地址、您访问的时间和地点、路由数据包、信息发送人和接收数据（但不是信息本身），以及其他类似的特征记录。我们将使用Cookies和类似统一资源定位器（URL）的导航数据来收集您访问时间和日期、搜索和查看的信息等。 </p>
+              <p></p>
+              <p>2、个人信息的使用 </p>
+              <p>2.2 匿名汇总统计数据不是“见面”所定义的个人用户信息，我们将为多种目的，包括但不限于分析和使用模式的报告等，来保存和使用此类信息。“见面”保留以任何目的或单方面许可第三方使用和披露匿名汇总统计数据的权利。 </p>
+              <p></p>
+              <p>3、个人信息的披露 </p>
+              <p>3.1 除非本隐私政策载明的有限披露，我们会妥善保存您的个人信息并不会泄露客户名单。 </p>
+              <p>3.2 您于此授权，以下情形下，我们将会向第三方披露您的个人信息而无需通过您的同意：</p>
+		      <p class="indent">3.2.1 如果我们披露这些信息是用来识别、联系或向可能对我们的权利或财产、网站用户或者其他任何人（包括其他任何人的权利和财产）造成损害之行为提起诉讼之必要； </p>
+		      <p class="indent">3.2.2 法律调查之必要； </p>
+		      <p class="indent">3.2.3 此类披露是法律规定或应向我们送达的传票或其他执法部门发出的令状之必要。 </p>
+              <p></p>
+		      <p>4、 安全 </p>
+              <p>4.1 对我们来说，个人信息的安全非常重要。我们将尽合理的商业努力保障您的个人信息安全，并实施合理的商业程序限制非授权访问、使用或者披露您的个人信息。尽管采取上述措施，但是您应当知晓“见面”不能完全避免与个人信息相关的安全危险。 </p>
+		      <p>5、 您应当协助我们以保护您的个人信息安全。例如，不要泄露您的个人密码。 </p>
+              <p></p>
+		      <p>6、 第三方网站 </p>
+              <p></p>
+              <p>6.1 当您点击面孔网链接的其他网站时，您已经离开我们的网站并访问其他网站，其他网站可能会收集您的个人信息或匿名数据，因此，我们无法控制、检查或者回应此类网站和网站内容。 </p>
+		      <p>6.2 本隐私政策不适用于在您点击链接后的外部网站收集数据的行为。</p>
+              <p></p>
+		      <p>7、 对青少年个人信息的收集和使用 </p>
+		      <p>7.1 我们建议18岁以下的未成年人在其法定监护人的许可和指导下使用面孔网和“见面”。 </p>
+		      <p>7.2 面孔网和“见面”不会使用未成年人的个人信息，也不会向任何第三方透露可识别的信息，监护人有权拒绝面孔网和“见面”进一步收集被监护人的个人信息，或要求面孔网和“见面”删除该被监护人个人信息。 </p>
+              <p></p>
+		      <p>8、 Cookies使用 </p>
+		      <p>Cookies是当您浏览网站时，网站发送给您的电脑和手机的少量信息。我们将在网站上使用会话Cookies（当您关闭浏览器的时候随之过期）和持久Cookies（除非您删除此类Cookies，否则将一直保存在您的电脑上）来向您提供更加个性化的交互服务。 </p>
+              <p></p>
+		      <p>9、 本隐私政策的修订 </p>
+		      <p>9.1 本隐私政策容许调整，如果我们对使用您的个人信息方法做出任何实质性调整，我们将通过您提供的电子邮件地址，或通过网站的公告通知您。 </p>
+		      <p>9.2 我们发出的包含此类变更通知的电子邮件毫无疑问的组成上述变更通知的有效部分。如果您不希望我们改变对您个人信息的使用，您必须早于您期望停止使用我们的账户之前通知我们。您继续使用面孔网和“见面”的行为，将被视为您知晓并同意受通知中此类变更条款的约束。 </p>
+			</div>
+        </div>
+    </div>
+
+</div>
+
+<div id="app">
+</div>
+
+<div id="above-all">
+    <div class="action-sheet wait-loading">
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <link rel="stylesheet" media="screen" href="css/base.css" />
+    <link rel="stylesheet" media="screen" href="css/main.css" />
+    <script type="text/javascript" src="js/json2-min.js"></script>
+    <script type="text/javascript" src="js/r.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/tmpl.js"></script>
+    <script type="text/javascript" src="js/app-met.js"></script>
+
+    <script type="text/javascript">
+        jsi.startApp = function() {
+            jsi.sqlSelect("select acc_key, acc_secret from conf", null, function(rows){
+                var s = "";
+                window.MY_GID = window.ACC_KEY = window.ACC_SECRET = "";
+                for(var y=0; y < rows.length; y++) {
+                    window.MY_GID = rows[y][0];     // XXX: quick dirty hack!
+                    window.ACC_KEY = rows[y][0] || "";
+                    window.ACC_SECRET = rows[y][1] || "";
+                    for(var x=0; x < rows[y].length; x++) {
+                        s += rows[y][x] + ", "
+                    }
+                    s += "\n";
+                }
+                if (ACC_SECRET) {   // authorized user
+                    jsi.loadURL("file:///android_asset/www/logged-in.html");
+                } else {
+                    jsi.loadURL("file:///android_asset/www/browsing.html");
+                }
+                //console.log("CONF: " + s);
+            });
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>

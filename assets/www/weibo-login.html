@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <link rel="stylesheet" media="screen" href="css/base.css" />
+    <link rel="stylesheet" media="screen" href="css/main.css" />
+    <script type="text/javascript" src="js/json2-min.js"></script>
+    <script type="text/javascript" src="js/r.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+
+    <script type="text/javascript">
+        //$.ready(function(){
+        jsi.startApp = function() {
+            var url, cb;
+            if ($.DEBUG) {
+                console.log("WTF\nUSING DEBUG URL");
+                url = "http://10.0.2.2:4000/api/sina/request_token";
+                cb = "oob";
+            } else {
+                console.log("WTF\nUSING WEB URL");
+                url = "http://met.miankong.cc/api/sina/request_token";
+                cb  = "http://met.miankong.cc/api/sina/cb"
+            }
+            var q = jsi.getRequestTokenQ(url, {oauth_callback: cb});
+            if (!q) {
+                console.log("XXXXX: no request token query string");
+            } else {
+                jsi.loadURL(url + "?" + q);
+                //window.location = url + "?" + q;
+            }
+        };
+        //});
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <link rel="stylesheet" media="screen" href="css/base.css" />
+    <link rel="stylesheet" media="screen" href="css/main.css" />
+    <script type="text/javascript" src="js/json2-min.js"></script>
+    <script type="text/javascript" src="js/r.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/tmpl.js"></script>
+    <script type="text/javascript" src="js/app-met.js"></script>
+</head>
+<body>
+<div style="display:none;" id="templates">
+    <div id="tmpl-tabbar" data-view="TabbarView" data-delegate="BrowsingLogin">
+        <div>
+            <div id="tabbed-views">
+            </div>
+            <div id="tabbar">
+                <div data-touchable="login" class="loginWeibo">
+                    <label class="tab" id="loginWeibo"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tmpl-view-loginWeibo" data-view="NavView">
+        <div class="has-navbar">
+            <div class="navbar pack-right">
+                <div class="btn icon" data-touchable="PublicTimeline.refresh">
+                    <label class="black reload"></label>
+                </div>
+            </div>
+            <div class="nav-views" data-view="timeline">
+            </div>
+        </div>
+    </div>
+
+    <div id="tmpl-view-timeline" data-delegate="PublicTimeline">
+        <div>
+            <div id="browsing" style="display:none">
+            </div>
+            <div id="browsing-empty" style="display:none">
+                <div>见面</div>
+            </div>
+            <div id="browsing-loading">
+                <img src="img/loading120.gif">
+            </div>
+            <div id="browsing-error" style="display:none">
+                <div>网络不通！</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tmpl-view-profile" data-delegate="ProfileCtrl">
+        <div></div>
+    </div>
+
+    <div id="tmpl-loading">
+        <div class="loading">
+            <div class="loading-indicator"></div>
+            <div class="error-hint"></div>
+        </div>
+    </div>
+</div>
+
+<div id="app">
+</div>
+
+<div id="above-all">
+    <div class="action-sheet wait-loading">
+    </div>
+</div>
+
+</body>
+</html>

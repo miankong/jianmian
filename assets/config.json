@@ -1,0 +1,25 @@
+{
+    "Index":	"",
+
+    "AppKey":	"13069625268895745",
+    "AppSecret":"1-mOW)X^h_9kJwG|:LGKzCk-Acfl;-:4_}oAyPdUO1)l4s3JtP",
+
+    "Camera":	{
+        "PictureTitle":	"MetOnce",
+        "SubFolder":	"MET_Miankong",
+        "DefaultQuality":0.5
+    },
+    "ImageCache":{
+        "DbName":		"",
+        "DbTable":		"img",
+        "ValidDuration":2592000
+    },
+    "Dbs": {
+        "met.app.db":	{
+            "conf":		"id integer primary key autoincrement, gid text, acc_key text, acc_secret text, json text",
+            "keyvalue":	"key text primary key, value text",
+            "img":		"url text primary key, content_uri text, ctm integer"
+        }
+    },
+    "SaveWWWFormDataAndPassword": true
+}
