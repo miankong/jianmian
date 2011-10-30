@@ -28,11 +28,35 @@ $ cp xx.xx keystore/.keystore
 2.5  在bin下面可以发现JianMian-release.apk；
 
 
-3. 修改方法：
+3. 目录说明：
 
-3.1 
+/jianmian  			项目根目录
+
+assets	 	 			HTML5源代码目录
+assets/www 			见面前端代码
+assets/www/css	CSS3文件
+assets/www/img	图像文件
+assets/www/js	  JS代码
+libs			 			Julia 库
+proguard   			优化文件
+res		     			资源文件
+src        			Java源代码目录（无文件，见面项目全部用HTML5代码完成）
 
 
 
+4. 修改方法：
+
+4.1 设置你的项目签名，修改 ant.properties ；
+
+4.2 设置你的Android SDK文件路径，修改 local.properties ;
+
+4.3 如需修改生成的apk名称，编辑 build.xml 里面 project name 字段；
+
+4.4 如需修改版本号，编辑 AndroidManifest.xml 里面 android:versionCode、android:versionName 字段；
+
+4.5 不同的应用需要修改 package name，编辑 AndroidManifest.xml 里面 package 字段。
+
+
+CopyRight Miankong.cc 2011
 
 
