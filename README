@@ -30,17 +30,17 @@ $ cp xx.xx keystore/.keystore
 
 3. 目录说明：
 
-/jianmian  			项目根目录
+/jianmian	项目根目录
 
-assets	 	 			HTML5源代码目录
-assets/www 			见面前端代码
+assets	HTML5源代码目录
+assets/www	见面前端代码
 assets/www/css	CSS3文件
 assets/www/img	图像文件
 assets/www/js	  JS代码
-libs			 			Julia 库
-proguard   			优化文件
-res		     			资源文件
-src        			Java源代码目录（无文件，见面项目全部用HTML5代码完成）
+libs	Julia 库
+proguard	优化文件
+res	资源文件
+src Java源代码目录（无文件，见面项目全部用HTML5代码完成）
 
 
 
